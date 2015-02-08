@@ -1,8 +1,9 @@
 namespace :bootstrap do
-  # desc "Add the default developer"
-  # task :default_admin => :environment do
-  #   Developer.create( :name => KeleiGong, :email => 'kgong@ncsu.edu', :password => 'qwert', :admin => true )
-  # end
+  desc "Add the default developer"
+  task :default_admin => :environment do
+    Admin.create( :name => 'KeleiGong', :email => 'kgong@ncsu.edu', :password => 'qwert' )
+    Admin.create( :name => 'zsp', :email => 'szhang29@ncsu.edu', :password => 'qwert' )
+  end
 
   desc "Create the default stage"
   task :default_stage => :environment do

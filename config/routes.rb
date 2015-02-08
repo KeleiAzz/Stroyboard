@@ -3,8 +3,6 @@ Rails.application.routes.draw do
 
   resources :admins
 
-  resources :stages
-
   resources :stories
   get 'stories/:id/signup' => 'stories#signup', as: :signup
   resources :projects
