@@ -1,5 +1,5 @@
 <p id="notice"><%= notice %></p>
-
+<h1>Project details</h1>
 <p>
   <strong>Name:</strong>
   <%= @project.name %>
@@ -15,8 +15,24 @@
         <td><%= link_to 'Show', story %></td>
         <td><%= link_to 'Edit', edit_story_path(story) %></td>
         <td><%= link_to 'Destroy', story, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><% if current_user.class == Developer %>
+           <%= link_to 'Sign up',signup_path(story) %>
+
+        <% end %></td>
+        <br>
       </tr>
   <% end %>
+  <br>
+  <strong>Developers List:</strong>
+  <br>
+  <% Developer.where(project_id: @project.id).each do |developer| %>
+      <tr>
+        <td><%= developer.name %></td>
+        <td><%= link_to 'Show', developer %></td>
+        <br>
+      </tr>
+  <% end %>
+  <br>
   <br>
   <%= link_to 'New Story', new_story_path %>
 </p>

@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :stages
 
   resources :stories
-
+  get 'stories/:id/signup' => 'stories#signup', as: :signup
   resources :projects
 
   resources :developers
@@ -16,9 +16,12 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root :to => 'sessions#new'
+
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'
   get 'logout'  => 'sessions#destroy'
+
+  # match get "stories/:signup", :controller => 'stories', :action => 'signup'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

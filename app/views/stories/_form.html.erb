@@ -29,7 +29,7 @@
     <%= select("story", "stage_id", Stage.all.collect{ |c| [ c.name, c.id] }) %>
 
     <%= f.label :project_id %>
-    <%= select("story", "project_id", Project.all.collect{ |c| [ c.name, c.id] }) %>
+    <%= select("story", "project_id", [Project.find_by(id: current_user.project_id)].collect{ |c| [ c.name, c.id] }) %>
 
 
     <div class="field">

@@ -1,7 +1,8 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
-  before_action :logged_in_user, only: [:index, :show, :edit, :update, :destroy]
+  before_action :logged_in_user, only: [:index, :show]
   before_action :correct_user,   only: [:new, :edit, :update, :destroy]
+  #before_action :correct_user_admin,   only: [:new, ]
   # GET /projects
   # GET /projects.json
   def index
@@ -74,11 +75,14 @@ class ProjectsController < ApplicationController
     end
     def logged_in_user
      unless logged_in?
-       flash[:danger] = "Please log in."
+       flash[:notice] = "Please log in."
        redirect_to root_path
      end
     end
     def correct_user
-     redirect_to(root_url) unless current_user.class == Admin || current_user == @developer
+      unless current_user.class == Admin
+        flash[:notice] = "Only access by Admin."
+        redirect_to projects_path
+      end
     end
 end

@@ -1,6 +1,6 @@
 class DevelopersController < ApplicationController
   before_action :set_developer, only: [:show, :edit, :update, :destroy]
-  before_action :logged_in_user, only: [:index, :show, :edit, :update, :destroy]
+  before_action :logged_in_user, only: [:index]
   before_action :correct_user,   only: [:show, :edit, :update]
   before_action :correct_user_admin,   only: [:new, :destroy]
   # GET /Developers
@@ -92,7 +92,7 @@ class DevelopersController < ApplicationController
     def correct_user_admin
       if current_user.class != Admin
         flash[:notice] = "Can only be accessed by Admin."
-        redirect_to(root_url)
+        redirect_to developers_path
       end
 
     end

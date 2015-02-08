@@ -1,6 +1,8 @@
 class StoriesController < ApplicationController
   before_action :set_story, only: [:show, :edit, :update, :destroy]
-  before_action :logged_in_user, only: [:index, :new, :show, :edit, :update, :destroy]
+  before_action :logged_in_user, only: [:index, :show, :edit, :update, :destroy]
+  before_action :logged_in_developer, only: [:new]
+  before_action :correct_user, only: [:edit, :update, :destroy]
   # GET /stories
   # GET /stories.json
   def index
@@ -60,7 +62,17 @@ class StoriesController < ApplicationController
       format.json { head :no_content }
     end
   end
-
+  def signup
+    if current_user.class == Developer && Story.find(params[:id]).project_id == current_user.project_id
+      current_user.story_id = params[:id]
+      current_user.save
+      redirect_to projects_path
+    elsif current_user.class != Developer || current_user.project_id != Story.find(params[:id]).project_id
+      flash[:notice] = "You can't sign up for story"
+      redirect_to projects_path
+    end
+    # redirect_to projects_path
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_story
@@ -76,5 +88,21 @@ class StoriesController < ApplicationController
         flash[:danger] = "Please log in."
        redirect_to root_path
      end
+    end
+    def logged_in_developer
+      unless current_user.class == Developer
+        flash[:notice] = "Can only be created by developer"
+        redirect_to projects_path
+      end
+    end
+    def correct_user
+      if current_user.class == Developer
+        @developer = Developer.find(params[:id])
+      end
+      unless current_user == @developer
+        flash[:notice] = "You are not permited to edit/delete this story"
+        redirect_to projects_path
+      end
+
     end
 end

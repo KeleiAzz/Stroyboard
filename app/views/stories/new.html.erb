@@ -2,4 +2,8 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Back', projects_path %>
+<% if Project.find_by(id: current_user.project_id).nil? %>
+    <%= link_to 'Back', projects_path %>
+    <% else %>
+    <%= link_to 'Back', project_path(Project.find_by(id: current_user.project_id)) %>
+<% end %>
