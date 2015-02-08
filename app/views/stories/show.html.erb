@@ -7,6 +7,9 @@
   <strong>Description:</strong>
   <%= @story.description %>
   <br>
+  <strong>Point:</strong>
+  <%= @story.point %>
+  <br>
   <strong>Project:</strong>
   <%= Project.find(@story.project_id).name %>
   <br>

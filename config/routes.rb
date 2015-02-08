@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   resources :stories
   get 'stories/:id/signup' => 'stories#signup', as: :signup
+  get 'developers/assign_developer' => 'developers#assign'
   resources :projects
 
   resources :developers

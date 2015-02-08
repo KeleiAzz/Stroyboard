@@ -23,6 +23,10 @@ class DevelopersController < ApplicationController
   def edit
   end
 
+  def assign
+
+  end
+
   # POST /Developers
   # POST /Developers.json
   def create
@@ -73,12 +77,7 @@ class DevelopersController < ApplicationController
     def developer_params
       params.require(:developer).permit(:name, :email, :password, :project_id, :story_id)
     end
-    def logged_in_user
-      unless logged_in?
-        flash[:notice] = "Please log in."
-        redirect_to root_path
-      end
-    end
+
     def correct_user
       if current_user.class == Developer
         @developer = Developer.find(params[:id])

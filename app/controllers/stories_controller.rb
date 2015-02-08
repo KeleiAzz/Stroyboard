@@ -27,6 +27,7 @@ class StoriesController < ApplicationController
   # POST /stories.json
   def create
     @story = Story.new(story_params)
+    @story.developer_id = current_user.id
 
     respond_to do |format|
       if @story.save
@@ -81,20 +82,16 @@ class StoriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def story_params
-      params.require(:story).permit(:title, :description, :point_value, :content, :stage, :project_id)
+      params.require(:story).permit(:title, :description, :point, :content, :stage, :project_id)
     end
-    def logged_in_user
-      unless logged_in?
-        flash[:danger] = "Please log in."
-       redirect_to root_path
-     end
-    end
+
     def logged_in_developer
       unless current_user.class == Developer
         flash[:notice] = "Can only be created by developer"
         redirect_to projects_path
       end
     end
+
     def correct_user
       if current_user.class == Developer
         @developer = Developer.find(params[:id])

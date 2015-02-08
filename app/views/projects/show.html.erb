@@ -34,7 +34,9 @@
   <% end %>
   <br>
   <br>
-  <%= link_to 'New Story', new_story_path %>
+  <% if current_user.project_id == @project.id%>
+    <%= link_to 'New Story', new_story_path %>
+  <% end %>
 </p>
 
 <%= link_to 'Edit', edit_project_path(@project) %> |

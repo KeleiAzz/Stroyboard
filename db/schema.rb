@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150208201948) do
+ActiveRecord::Schema.define(version: 20150208230425) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email"
@@ -48,12 +48,13 @@ ActiveRecord::Schema.define(version: 20150208201948) do
   create_table "stories", force: :cascade do |t|
     t.string   "title"
     t.string   "description"
-    t.integer  "point_value"
+    t.integer  "point"
     t.text     "content"
     t.integer  "project_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "stage"
+    t.integer  "developer_id"
   end
 
 end

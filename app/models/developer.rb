@@ -1,7 +1,13 @@
 class Developer < ActiveRecord::Base
-  belongs_to :story
+  has_many :story
   belongs_to :project
-  validates :name, :presence => true
-  validates :email, :presence => true
+
+  validates :name, length: { maximum: 32 }, :presence => true
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  validates :email, length: { maximum: 255 }, :presence => true,
+            format: { with: VALID_EMAIL_REGEX },
+            uniqueness: true
+  validates :password, length: { maximum: 32 }, :presence => true
+
   has_secure_password
 end

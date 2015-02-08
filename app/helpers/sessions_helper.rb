@@ -26,4 +26,12 @@ module SessionsHelper
     session.delete(:developer_id)
     @current_user = nil
   end
+
+  def logged_in_user
+    unless logged_in?
+      flash[:notice] = "Please log in."
+      redirect_to root_path
+    end
+  end
+
 end

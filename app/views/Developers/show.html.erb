@@ -1,8 +1,22 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
-  <%= @developer.name %>
+  <strong>Name:</strong><br>
+  <%= @developer.name %><br>
+
+  <strong>Email:</strong><br>
+  <%= @developer.email%><br>
+
+  <strong>Stories created:</strong><br>
+  <% Story.where(developer_id: @developer.id).each do |story| %>
+      <tr>
+        <td><%= story.title %></td>
+        <td><%= link_to 'Show', story %></td>
+      </tr><br>
+  <% end %><br>
+
+  <strong>Stories current work on:</strong><br>
+  <%= Story.find(@developer.story_id).title %><br>
 </p>
 
 <%= link_to 'Edit', edit_developer_path(@developer) %> |
