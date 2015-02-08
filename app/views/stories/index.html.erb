@@ -1,3 +1,5 @@
+<%= @project %>
+
 <p id="notice"><%= notice %></p>
 
 <h1>Listing Stories</h1>
@@ -11,9 +13,9 @@
   </thead>
 
   <tbody>
-    <% @stories.each do |story| %>
+    <% Story.where(project_id: 2).each do |story| %>
       <tr>
-        <td><%= story.name %></td>
+        <td><%= story.title %></td>
         <td><%= link_to 'Show', story %></td>
         <td><%= link_to 'Edit', edit_story_path(story) %></td>
         <td><%= link_to 'Destroy', story, method: :delete, data: { confirm: 'Are you sure?' } %></td>

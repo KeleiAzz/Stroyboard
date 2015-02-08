@@ -1,6 +1,7 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
-
+  before_action :logged_in_user, only: [:index, :show, :edit, :update, :destroy]
+  before_action :correct_user,   only: [:new, :edit, :update, :destroy]
   # GET /projects
   # GET /projects.json
   def index
@@ -69,6 +70,15 @@ class ProjectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.require(:project).permit(:name)
+      params.require(:project).permit(:name, :description)
+    end
+    def logged_in_user
+     unless logged_in?
+       flash[:danger] = "Please log in."
+       redirect_to root_path
+     end
+    end
+    def correct_user
+     redirect_to(root_url) unless current_user.class == Admin || current_user == @developer
     end
 end

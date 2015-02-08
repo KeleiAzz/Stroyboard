@@ -2,8 +2,30 @@
 
 <p>
   <strong>Name:</strong>
-  <%= @story.name %>
+  <%= @story.title %>
+  <br>
+  <strong>Description:</strong>
+  <%= @story.description %>
+  <br>
+  <strong>Project:</strong>
+  <%= Project.find(@story.project_id).name %>
+  <br>
+  <strong>Stage:</strong>
+  <%= Stage.find(@story.stage_id).name %>
+  <br>
+  <strong>Developer:</strong>
+  <% Developer.where(story_id: @story.id).each do |developer| %>
+      <tr>
+        <td><%= developer.name %></td>
+        <td><%= link_to 'Show', developer %></td>
+        <td><%= link_to 'Edit', edit_developer_path(developer) %></td>
+        <td><%= link_to 'Destroy', developer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+  <% end %>
+  <br>
+  <strong>Content:</strong>
+  <%= @story.content %>
 </p>
 
 <%= link_to 'Edit', edit_story_path(@story) %> |
-<%= link_to 'Back', stories_path %>
+<%= link_to 'Back', Project.find_by(id: @story.project_id) %>

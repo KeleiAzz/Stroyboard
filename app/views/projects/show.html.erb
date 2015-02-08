@@ -3,6 +3,22 @@
 <p>
   <strong>Name:</strong>
   <%= @project.name %>
+  <br>
+  <strong>Description:</strong>
+  <%= @project.description %>
+  <br>
+  <strong>Stories List:</strong>
+  <br>
+  <% Story.where(project_id: @project.id).each do |story| %>
+      <tr>
+        <td><%= story.title %></td>
+        <td><%= link_to 'Show', story %></td>
+        <td><%= link_to 'Edit', edit_story_path(story) %></td>
+        <td><%= link_to 'Destroy', story, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+  <% end %>
+  <br>
+  <%= link_to 'New Story', new_story_path %>
 </p>
 
 <%= link_to 'Edit', edit_project_path(@project) %> |

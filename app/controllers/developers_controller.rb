@@ -1,28 +1,30 @@
 class DevelopersController < ApplicationController
   before_action :set_developer, only: [:show, :edit, :update, :destroy]
-
-  # GET /developers
-  # GET /developers.json
+  before_action :logged_in_user, only: [:index, :show, :edit, :update, :destroy]
+  before_action :correct_user,   only: [:show, :edit, :update]
+  before_action :correct_user_admin,   only: [:new, :destroy]
+  # GET /Developers
+  # GET /Developers.json
   def index
     @developers = Developer.all
   end
 
-  # GET /developers/1
-  # GET /developers/1.json
+  # GET /Developers/1
+  # GET /Developers/1.json
   def show
   end
 
-  # GET /developers/new
+  # GET /Developers/new
   def new
     @developer = Developer.new
   end
 
-  # GET /developers/1/edit
+  # GET /Developers/1/edit
   def edit
   end
 
-  # POST /developers
-  # POST /developers.json
+  # POST /Developers
+  # POST /Developers.json
   def create
     @developer = Developer.new(developer_params)
 
@@ -37,8 +39,8 @@ class DevelopersController < ApplicationController
     end
   end
 
-  # PATCH/PUT /developers/1
-  # PATCH/PUT /developers/1.json
+  # PATCH/PUT /Developers/1
+  # PATCH/PUT /Developers/1.json
   def update
     respond_to do |format|
       if @developer.update(developer_params)
@@ -51,8 +53,8 @@ class DevelopersController < ApplicationController
     end
   end
 
-  # DELETE /developers/1
-  # DELETE /developers/1.json
+  # DELETE /Developers/1
+  # DELETE /Developers/1.json
   def destroy
     @developer.destroy
     respond_to do |format|
@@ -69,6 +71,29 @@ class DevelopersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def developer_params
-      params.require(:developer).permit(:name)
+      params.require(:developer).permit(:name, :email, :password, :project_id, :story_id)
+    end
+    def logged_in_user
+      unless logged_in?
+        flash[:notice] = "Please log in."
+        redirect_to root_path
+      end
+    end
+    def correct_user
+      if current_user.class == Developer
+        @developer = Developer.find(params[:id])
+      end
+      if current_user.class != Admin && current_user != @developer
+        flash[:notice] = "Access denied!"
+        redirect_to developers_path
+      end
+
+    end
+    def correct_user_admin
+      if current_user.class != Admin
+        flash[:notice] = "Can only be accessed by Admin."
+        redirect_to(root_url)
+      end
+
     end
 end
