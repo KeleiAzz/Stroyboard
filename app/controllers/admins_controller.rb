@@ -1,6 +1,7 @@
 class AdminsController < ApplicationController
   before_action :set_admin, only: [:show, :edit, :update, :destroy]
-
+  before_action :logged_in_admin, only: [:new, :index, :show]
+  before_action :correct_user,   only: [:edit, :update, :destroy]
   # GET /admins
   # GET /admins.json
   def index
@@ -69,6 +70,26 @@ class AdminsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_params
-      params.require(:admin).permit(:email, :password)
+      params.require(:admin).permit(:email, :password, :name)
     end
+
+  def logged_in_admin
+    if current_user.class != Admin
+      flash[:notice] = "Only access by Admin."
+      redirect_to root_path
+    end
+  end
+  def correct_user
+    if current_user.class == Admin
+      @admin = Admin.find(params[:id])
+      if current_user[:admin_id] != @admin.id
+        flash[:notice] = "You can't edit other's profile"
+        redirect_to admins_path
+      end
+    else
+      flash[:notice] = "Only access by Admin"
+      redirect_to root_path
+    end
+
+  end
 end
