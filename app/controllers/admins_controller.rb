@@ -82,7 +82,7 @@ class AdminsController < ApplicationController
   def correct_user
     if current_user.class == Admin
       @admin = Admin.find(params[:id])
-      if current_user[:admin_id] != @admin.id
+      if current_user.id != @admin.id
         flash[:notice] = "You can't edit other's profile"
         redirect_to admins_path
       end

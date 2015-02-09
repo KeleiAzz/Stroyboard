@@ -1,7 +1,19 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
+  title: MyString1
+  description: MyDescription
+  point: 10
+  content: MyContent
+  project_id: 1
+  stage: In Dev
+  developer_id: 1
 
 two:
-  name: MyString
+  title: MyString2
+  description: MyDescription
+  point: 10
+  content: MyContent
+  project_id: 2
+  stage: In Dev
+  developer_id: 2

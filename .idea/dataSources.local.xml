@@ -2,5 +2,9 @@
 <project version="4">
   <component name="dataSourceStorageLocal">
     <data-source name="Rails testproject: development" uuid="4159a85e-65fe-40cf-8c75-de31f92de881" />
+    <data-source name="Rails testproject: development" uuid="1064c33f-0023-49b1-a4c9-816d078ac5e6">
+      <first-sync>true</first-sync>
+    </data-source>
+    <data-source name="Rails testproject: test" uuid="295c1388-262a-41ce-9883-f3c6b423f582" />
   </component>
 </project>
