@@ -16,7 +16,9 @@
   <% end %><br>
 
   <strong>Stories current work on:</strong><br>
-  <%= Story.find(@developer.story_id).title %><br>
+  <% if !@developer.story_id.nil? %>
+    <%= Story.find(@developer.story_id).title %><br>
+  <% end %>
 </p>
 
 <%= link_to 'Edit', edit_developer_path(@developer) %> |

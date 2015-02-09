@@ -39,12 +39,6 @@ ActiveRecord::Schema.define(version: 20150208230425) do
     t.datetime "updated_at"
   end
 
-  create_table "stages", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "stories", force: :cascade do |t|
     t.string   "title"
     t.string   "description"
