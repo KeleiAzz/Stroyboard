@@ -100,6 +100,5 @@ class StoriesController < ApplicationController
         flash[:notice] = "You are not permited to edit/delete this story"
         redirect_to projects_path
       end
-
     end
 end
