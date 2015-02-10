@@ -8,13 +8,18 @@
 </head>
 <body>
 <h1>Story board test</h1>
-
-<br>
+<% if !current_user.nil? %>
+<p>Current user: <%= current_user.name %> <%= '(' + current_user.class.to_s + ')' %></p>
+    <% end %>
 <%= yield %>
-<br><br>
-
-<%= link_to "Show all projects", projects_url %> <%= link_to "Show all Developers", developers_url %>
 <br>
+<br>
+<%= link_to "Home Page", home_path %>
+<br>
+<% if current_user.nil? %>
+<%= link_to "Log in", login_path %>
+<% end %>
+
 <%= link_to "Log out", logout_path, method: :get %>
 </body>
 </html>

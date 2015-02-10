@@ -33,12 +33,14 @@
       </tr>
   <% end %>
   <br>
-  <strong>Add developer to project:</strong>
-  <br>
+  <% if current_user.class == Admin %>
+      <strong>Add developer to project:</strong>
+      <br>
   <%= form_for @developer, url: @project do |f|%>
       <%= select("developer", "id", Developer.all.collect{ |c| [ c.name, c.id] }) %>
       <%= f.submit "Add"%>
       <% end %>
+  <% end %>
   <br>
 
 </p>

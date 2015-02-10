@@ -26,6 +26,8 @@ Rails.application.routes.draw do
   post   'login'   => 'sessions#create'
   get 'logout'  => 'sessions#destroy'
 
+  resource :static_pages
+  get 'home' => 'static_pages#home'
   # match get "stories/:signup", :controller => 'stories', :action => 'signup'
 
   # Example of regular route:
