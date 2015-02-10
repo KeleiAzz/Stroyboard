@@ -3,6 +3,7 @@ class DevelopersController < ApplicationController
   before_action :logged_in_user, only: [:index]
   before_action :correct_user,   only: [:show, :edit, :update]
   before_action :correct_user_admin,   only: [:new, :destroy]
+  before_action :correct_email, only: [:create]
   # GET /Developers
   # GET /Developers.json
   def index
@@ -95,5 +96,11 @@ class DevelopersController < ApplicationController
         redirect_to developers_path
       end
 
+    end
+    def correct_email
+      if !Admin.find_by_email(developer_params[:email]).nil?
+        flash[:notice] = "The email has already been registered as admin!"
+        redirect_to developers_path
+      end
     end
 end
