@@ -93,6 +93,7 @@ class StoriesController < ApplicationController
     end
 
     def correct_user
+
       if current_user.class == Developer
         @story = Story.find(params[:id])
         @project = Project.find(@story.project_id)

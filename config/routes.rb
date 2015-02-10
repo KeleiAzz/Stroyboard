@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'static_pages/home'
+
+  get 'static_pages/help'
+
   get 'sessions/new'
 
   resources :admins
@@ -7,6 +11,7 @@ Rails.application.routes.draw do
   get 'stories/:id/signup' => 'stories#signup', as: :signup
   get 'developers/assign_developer' => 'developers#assign'
   resources :projects
+  post 'projects/:id' => 'projects#add_to_dev'
 
   resources :developers
 
@@ -20,6 +25,8 @@ Rails.application.routes.draw do
   post   'login'   => 'sessions#create'
   get 'logout'  => 'sessions#destroy'
 
+  resource :static_pages
+  get 'home' => 'static_pages#home'
   # match get "stories/:signup", :controller => 'stories', :action => 'signup'
 
   # Example of regular route:

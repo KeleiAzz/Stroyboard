@@ -21,7 +21,10 @@
     <% end %>
   </tbody>
 </table>
-
+<br>
+<% if  current_user.class == Developer && !current_user.project_id.nil?  %>
+<%= link_to 'New Story', new_story_path %>
+    <% end %>
 <br>
 
 <%= link_to 'New Project', new_project_path %>
