@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'static_pages/home'
+
+  get 'static_pages/help'
+
   get 'sessions/new'
 
   resources :admins
@@ -8,6 +12,7 @@ Rails.application.routes.draw do
   resources :stories
   get 'stories/:id/signup' => 'stories#signup', as: :signup
   resources :projects
+  post 'projects/:id' => 'projects#add_to_dev'
 
   resources :developers
 

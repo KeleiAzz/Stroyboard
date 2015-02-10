@@ -33,8 +33,14 @@
       </tr>
   <% end %>
   <br>
+  <strong>Add developer to project:</strong>
   <br>
-  <%= link_to 'New Story', new_story_path %>
+  <%= form_for @developer, url: @project do |f|%>
+      <%= select("developer", "id", Developer.all.collect{ |c| [ c.name, c.id] }) %>
+      <%= f.submit "Add"%>
+      <% end %>
+  <br>
+
 </p>
 
 <%= link_to 'Edit', edit_project_path(@project) %> |

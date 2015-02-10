@@ -96,10 +96,10 @@ class StoriesController < ApplicationController
       end
     end
     def correct_user
-      if current_user.class == Developer
-        @developer = Developer.find(params[:id])
-      end
-      unless current_user == @developer
+      # if current_user.class == Developer && current_user.project_id == Story.find(params[:id]).project_id
+      #   @developer = Developer.find_by(story_id = params[:id])
+      # end
+      unless current_user.class == Developer && current_user.project_id == Story.find(params[:id]).project_id
         flash[:notice] = "You are not permited to edit/delete this story"
         redirect_to projects_path
       end

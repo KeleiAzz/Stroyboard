@@ -79,6 +79,9 @@ class DevelopersController < ApplicationController
         redirect_to root_path
       end
     end
+    def add_project
+      Developer.find(params[:id]).project_id = params[:project_id]
+    end
     def correct_user
       if current_user.class == Developer
         @developer = Developer.find(params[:id])

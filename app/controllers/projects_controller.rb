@@ -12,6 +12,8 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.json
   def show
+    @developer = Developer.new()
+    @project = Project.find(params[:id])
   end
 
   # GET /projects/new
@@ -63,6 +65,12 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def add_to_dev
+    temp = Developer.find(params[:developer][:id])
+    temp.project_id = params[:id]
+    temp.save
+    redirect_to project_path
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_project
@@ -72,6 +80,9 @@ class ProjectsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
       params.require(:project).permit(:name, :description)
+    end
+    def developer_params
+      params.require(:developer).permit(:email)
     end
     def logged_in_user
      unless logged_in?
