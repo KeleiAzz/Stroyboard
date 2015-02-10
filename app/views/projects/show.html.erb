@@ -22,6 +22,9 @@
         <br>
       </tr>
   <% end %>
+  <% if current_user.class == Developer && current_user.project_id == @project.id %>
+      <%= link_to 'New Story', new_story_path %>
+      <% end %>
   <br>
   <strong>Developers List:</strong>
   <br>

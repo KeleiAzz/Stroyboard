@@ -66,7 +66,14 @@ class ProjectsController < ApplicationController
   end
 
   def add_to_dev
+
     temp = Developer.find(params[:developer][:id])
+    # if temp.project_id == params[:id]
+    #   flash[:notice] = "This project is already assigned to this developer"
+    # end
+    if !temp.project_id.nil? & temp.project_id != params[:id]
+      temp.story_id = nil
+    end
     temp.project_id = params[:id]
     temp.save
     redirect_to project_path
