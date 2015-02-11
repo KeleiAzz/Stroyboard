@@ -46,9 +46,7 @@ ActiveRecord::Schema.define(version: 20150211014059) do
     t.integer  "project_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-
     t.string   "stage"
-
     t.integer  "developer_id"
   end
 
