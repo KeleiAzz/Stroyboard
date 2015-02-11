@@ -45,6 +45,18 @@
       <% end %>
   <% end %>
   <br>
+  <strong>Search stories:</strong>
+  <%= form_tag url:@project, :method => :get do %>
+      <%= text_field_tag :search, params[:search], :maxlength => 5 %>
+      <%= submit_tag "Search" %>
+  <% end %>
+  <br>
+  <% if params[:search] %>
+    <% Story.where('title LIKE ? OR content LIKE ?', "%#{params[:search]}%","%#{params[:search]}%").each do |i| %>
+      <td><%= i.title%></td>
+        <td><%= link_to 'Show', i %></td>
+      <% end %>
+      <% end %>
 
   <% if current_user.class == Developer && current_user.project_id == @project.id %>
     <%= link_to 'New Story', new_story_path %>

@@ -2,7 +2,8 @@ class StoriesController < ApplicationController
   before_action :set_story, only: [:show, :edit, :update, :destroy]
   before_action :logged_in_user, only: [:index, :show, :edit, :update, :destroy]
   before_action :logged_in_developer, only: [:new]
-  before_action :correct_user, only: [:edit, :update, :destroy]
+  before_action :correct_user, only: [:update, :destroy]
+  before_action :correct_user_edit, only: [:edit]
   # GET /stories
   # GET /stories.json
   def index
@@ -12,6 +13,7 @@ class StoriesController < ApplicationController
   # GET /stories/1
   # GET /stories/1.json
   def show
+    @developer = Developer.new()
   end
 
   # GET /stories/new
@@ -26,10 +28,12 @@ class StoriesController < ApplicationController
   # POST /stories
   # POST /stories.json
   def create
+    # story_params[:creator] = current_user.id
     @story = Story.new(story_params)
     @story.developer_id = current_user.id
 
     respond_to do |format|
+      @story.developer_id = current_user.id
       if @story.save
         format.html { redirect_to @story, notice: 'Story was successfully created.' }
         format.json { render :show, status: :created, location: @story }
@@ -59,21 +63,42 @@ class StoriesController < ApplicationController
   def destroy
     @story.destroy
     respond_to do |format|
-      format.html { redirect_to stories_url, notice: 'Story was successfully destroyed.' }
+      format.html { redirect_to project_path({:id => current_user.project_id}), notice: 'Story was successfully destroyed.' }
       format.json { head :no_content }
     end
+    # redirect_to project_path({:id => current_user.project_id})
   end
   def signup
-    if current_user.class == Developer && Story.find(params[:id]).project_id == current_user.project_id
+    @story = Story.find(params[:id])
+    if params[:developer]
+      temp = Developer.find(params[:developer][:id])
+      temp.story_id = nil
+      temp.save
       current_user.story_id = params[:id]
       current_user.save
-      redirect_to projects_path
+      flash[:notice] = "Sign up successful"
+      redirect_to story_path(@story)
     elsif current_user.class != Developer || current_user.project_id != Story.find(params[:id]).project_id
       flash[:notice] = "You can't sign up for story"
       redirect_to projects_path
+    elsif current_user.story_id == @story.id
+      flash[:notice] = "You are already the developer of this story"
+      redirect_to story_path(@story)
+    elsif current_user.class == Developer && Story.find(params[:id]).project_id == current_user.project_id && !is_full(@story)
+      current_user.story_id = params[:id]
+      current_user.save
+      flash[:notice] = "Sign up successful"
+      redirect_to story_path(@story)
+    else
+      flash[:notice] = "This story is full, choose one to replace!"
+      redirect_to story_path({:id => @story.id, :replace => true})
     end
     # redirect_to projects_path
   end
+  def is_full(story)
+    Developer.where(story_id: story.id).length >= 2
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_story
@@ -93,14 +118,20 @@ class StoriesController < ApplicationController
     end
 
     def correct_user
-
-      if current_user.class == Developer
-        @story = Story.find(params[:id])
-        @project = Project.find(@story.project_id)
-      end
-      unless current_user.project_id == @project.id
-        flash[:notice] = "You are not permited to edit/delete this story"
-        redirect_to projects_path
+      unless current_user.class == Developer && current_user.project_id == Story.find(params[:id]).project_id
+        flash[:notice] = "You are not permited to delete this story"
+        redirect_to project_path(@story.project_id)
       end
     end
+    def correct_user_edit
+    # if current_user.class == Developer && current_user.project_id == Story.find(params[:id]).project_id
+    #   @developer = Developer.find_by(story_id = params[:id])
+    # end
+     unless current_user.class == Developer && current_user.project_id == Story.find(params[:id]).project_id && current_user.project_id == Story.find(params[:id]).id
+      flash[:notice] = "You are not permited to edit this story"
+      redirect_to project_path(@story.project_id)
+     end
+    end
+
+
 end

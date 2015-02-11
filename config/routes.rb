@@ -9,7 +9,11 @@ Rails.application.routes.draw do
 
   resources :stories
   get 'stories/:id/signup' => 'stories#signup', as: :signup
+
   get 'developers/assign_developer' => 'developers#assign'
+
+  post 'stories/:id' => 'stories#signup'
+
   resources :projects
   post 'projects/:id' => 'projects#add_to_dev'
 

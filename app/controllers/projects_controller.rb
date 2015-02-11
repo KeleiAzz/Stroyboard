@@ -14,6 +14,9 @@ class ProjectsController < ApplicationController
   def show
     @developer = Developer.new()
     @project = Project.find(params[:id])
+    if !params[:search].nil?
+      self.search
+    end
   end
 
   # GET /projects/new
@@ -66,17 +69,25 @@ class ProjectsController < ApplicationController
   end
 
   def add_to_dev
+    if !params[:developer].nil?
+      temp = Developer.find(params[:developer][:id])
+      # if temp.project_id == params[:id]
+      #   flash[:notice] = "This project is already assigned to this developer"
+      # end
+      if !temp.project_id.nil? & temp.project_id != params[:id]
+        temp.story_id = nil
+      end
+      temp.project_id = params[:id]
+      temp.save
+      flash[:notice] = "Add developer to project succseefully!"
+      redirect_to project_path({:id => params[:id]})
+    elsif !params[:search].nil?
+    redirect_to project_path({:id => params[:id], :search => params[:search]})
+      end
+  end
+  def search
+    params[:stories] = Story.where(:conditions => ['title LIKE ?', "%#{params[:search]}%"])
 
-    temp = Developer.find(params[:developer][:id])
-    # if temp.project_id == params[:id]
-    #   flash[:notice] = "This project is already assigned to this developer"
-    # end
-    if !temp.project_id.nil? & temp.project_id != params[:id]
-      temp.story_id = nil
-    end
-    temp.project_id = params[:id]
-    temp.save
-    redirect_to project_path
   end
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -89,9 +100,6 @@ class ProjectsController < ApplicationController
       params.require(:project).permit(:name, :description)
     end
 
-    def developer_params
-      params.require(:developer).permit(:email)
-    end
     def logged_in_user
      unless logged_in?
        flash[:notice] = "Please log in."
@@ -102,7 +110,7 @@ class ProjectsController < ApplicationController
     def correct_user
       unless current_user.class == Admin
         flash[:notice] = "Only access by Admin."
-        redirect_to projects_path
+        redirect_to project_path(@project)
       end
     end
 end
