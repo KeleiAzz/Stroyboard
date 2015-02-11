@@ -28,9 +28,11 @@ class StoriesController < ApplicationController
   # POST /stories
   # POST /stories.json
   def create
+    # story_params[:creator] = current_user.id
     @story = Story.new(story_params)
-
+    # @stroy.developer_id = current_user.id
     respond_to do |format|
+      @story.developer_id = current_user.id
       if @story.save
         format.html { redirect_to @story, notice: 'Story was successfully created.' }
         format.json { render :show, status: :created, location: @story }

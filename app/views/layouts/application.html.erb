@@ -9,7 +9,10 @@
 <body>
 <h1>Story board test</h1>
 <% if !current_user.nil? %>
-<p>Current user: <%= current_user.name %> <%= '(' + current_user.class.to_s + ')' %></p>
+<p>Current user: <%= current_user.name %> <%= '(' + current_user.class.to_s + ')' %>
+  <%= link_to 'Show', current_user.class == Developer ? current_user : current_user %>
+  <%= link_to 'Edit', current_user.class == Developer ? edit_developer_path(current_user) : edit_admin_path(current_user) %>
+</p>
     <% end %>
 <%= yield %>
 <br>

@@ -42,6 +42,10 @@ class DevelopersController < ApplicationController
   # PATCH/PUT /Developers/1
   # PATCH/PUT /Developers/1.json
   def update
+    if params[:developer][:project_id] != @developer.project_id
+      @developer.story_id = nil
+      @developer.save
+    end
     respond_to do |format|
       if @developer.update(developer_params)
         format.html { redirect_to @developer, notice: 'Developer was successfully updated.' }

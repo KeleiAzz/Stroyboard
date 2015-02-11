@@ -44,6 +44,8 @@
       <%= f.submit "Add"%>
       <% end %>
   <% end %>
+  <br>
+  <strong>Search stories:</strong>
   <%= form_tag url:@project, :method => :get do %>
       <%= text_field_tag :search, params[:search], :maxlength => 5 %>
       <%= submit_tag "Search" %>

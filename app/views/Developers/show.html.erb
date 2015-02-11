@@ -3,6 +3,25 @@
 <p>
   <strong>Name:</strong>
   <%= @developer.name %>
+  <br>
+  <strong>Email:</strong>
+  <%= @developer.email %>
+  <br>
+  <strong>Project working on:</strong>
+  <% if @developer.project_id == nil %>
+      <%= 'None' %>
+      <% else %>
+  <%= Project.find(@developer.project_id).name %>
+  <%= link_to 'Show', project_path({:id => @developer.project_id}) %>
+      <% end %>
+  <br>
+  <strong>Story working on:</strong>
+  <% if @developer.story_id == nil %>
+      <%= 'None' %>
+      <% else %>
+      <%= Story.find(@developer.story_id).title %>
+  <%= link_to 'Show', story_path({:id => @developer.story_id}) %>
+      <% end %>
 </p>
 
 <%= link_to 'Edit', edit_developer_path(@developer) %> |
