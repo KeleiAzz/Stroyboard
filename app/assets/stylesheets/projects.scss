@@ -1,3 +1,38 @@
 // Place all the styles related to the projects controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+h1{
+  color: black;
+  text-align: center;
+  font-family: arial, sans-serif;
+  font-size: 200%;
+}
+
+body{
+  text-align: center;
+  vertical-align: middle;
+  background-color: lightgrey;
+  font-size: large;
+  margin: 0;
+  padding: 0;
+  border: 2px solid #000000;
+  border-bottom-color: transparent;
+}
+
+a:link {
+  color: #000000;
+}
+
+a:visited {
+  color: #525660;
+}
+
+a:hover {
+  background-color: #999999;
+  text-decoration: underline;
+}
+
+div {
+  align: center;
+
+}
