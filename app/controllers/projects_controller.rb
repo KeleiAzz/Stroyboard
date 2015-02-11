@@ -79,7 +79,8 @@ class ProjectsController < ApplicationController
       end
       temp.project_id = params[:id]
       temp.save
-      redirect_to project_path(params)
+      flash[:notice] = "Add developer to project succseefully!"
+      redirect_to project_path({:id => params[:id]})
     elsif !params[:search].nil?
     redirect_to project_path({:id => params[:id], :search => params[:search]})
       end

@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   resources :stories
   get 'stories/:id/signup' => 'stories#signup', as: :signup
+  post 'stories/:id' => 'stories#signup'
   resources :projects
   post 'projects/:id' => 'projects#add_to_dev'
 
