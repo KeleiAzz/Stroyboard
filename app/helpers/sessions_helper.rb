@@ -3,10 +3,11 @@ module SessionsHelper
     if user.class == Admin
       session[:admin_id] = user.id
       session[:developer_id] = nil
+      flash[:notice] = "welcome, admin"
     elsif user.class == Developer
       session[:admin_id] = nil
       session[:developer_id] = user.id
-    # session[:admin_id] = admin.id
+      flash[:notice] = "welcome, developer"
     end
   end
   def current_user

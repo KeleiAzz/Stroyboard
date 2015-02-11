@@ -21,7 +21,6 @@ class AdminsControllerTest < ActionController::TestCase
     assert_difference('Admin.count') do
       post :create, admin: { email: 'a' + @admin.email,
                              password: 'MyPassword',
-                             password_digest: @admin.password_digest,
                              name: @admin.name }
     end
 
@@ -41,7 +40,6 @@ class AdminsControllerTest < ActionController::TestCase
   test "should update admin" do
     patch :update, id: @admin, admin: { email: 'a' + @admin.email,
                                         password: 'MyPassword',
-                                        password_digest: @admin.password_digest,
                                         name: @admin.name }
     assert_redirected_to @admin
   end
