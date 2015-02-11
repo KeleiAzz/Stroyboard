@@ -25,7 +25,6 @@ ActiveRecord::Schema.define(version: 20150208052948) do
   create_table "developers", force: :cascade do |t|
     t.string   "name"
     t.string   "email"
-    t.string   "password"
     t.integer  "project_id"
     t.integer  "story_id"
     t.datetime "created_at"
