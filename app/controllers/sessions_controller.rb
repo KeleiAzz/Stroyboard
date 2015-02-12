@@ -5,9 +5,7 @@ class SessionsController < ApplicationController
     developer = Developer.find_by(email: params[:session][:email])
     admin = Admin.find_by(email: params[:session][:email])
     if admin && admin.authenticate(params[:session][:password])
-
       log_in admin
-
       redirect_to home_path
 
     elsif developer && developer.authenticate(params[:session][:password])
@@ -17,8 +15,8 @@ class SessionsController < ApplicationController
 
     else
       # Create an error message.
-      flash[:danger] = params[:session][:email]
-#      flash[:danger] = 'Invalid email/password combination' # Not quite right!
+#      flash[:danger] = params[:session][:email]
+      flash[:danger] = 'Invalid email/password combination' # Not quite right!
       render 'new'
     end
   end

@@ -23,10 +23,8 @@
       <%= f.label :email %><br>
       <%= f.text_field :email %>
     </div>
-    <% if current_user.class == Developer %>
     <%= f.label :password %>
     <%= f.password_field :password %>
-    <% end %>
   <div class="actions">
     <%= f.submit %>
   </div>
