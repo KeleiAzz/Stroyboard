@@ -69,7 +69,9 @@ class ProjectsController < ApplicationController
   end
 
   def add_to_dev
+
     if !params[:developer].nil?
+      temp = Developer.new()
       temp = Developer.find(params[:developer][:id])
       # if temp.project_id == params[:id]
       #   flash[:notice] = "This project is already assigned to this developer"
@@ -78,8 +80,11 @@ class ProjectsController < ApplicationController
         temp.story_id = nil
       end
       temp.project_id = params[:id]
-      temp.save
-      flash[:notice] = "Add developer to project succseefully!"
+      if temp.save
+        flash[:notice] = "Add developer to project succseefully!"
+      end
+
+
       redirect_to project_path({:id => params[:id]})
     elsif !params[:search].nil?
     redirect_to project_path({:id => params[:id], :search => params[:search]})
