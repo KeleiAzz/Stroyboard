@@ -18,7 +18,12 @@ body{
   border: 2px solid #000000;
   border-bottom-color: transparent;
 }
-
+table{
+  align: center;
+}
+th{
+  text-align: left;
+}
 a:link {
   color: #000000;
 }

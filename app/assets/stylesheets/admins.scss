@@ -6,7 +6,7 @@ h1{
   color: black;
   text-align: center;
   font-family: arial, sans-serif;
-  font-size: 200%;
+  font-size: 100%;
 }
 
 body{
@@ -19,7 +19,16 @@ body{
   border: 2px solid #000000;
   border-bottom-color: transparent;
 }
+p{
+  text-align: center;
+}
 
+table{
+  align: center;
+}
+th{
+  text-align: left;
+}
 a:link {
   color: #000000;
 }
@@ -34,8 +43,7 @@ a:hover {
 }
 
 div {
-  align: center;
-
+  text-align: center;
 }
 
 
