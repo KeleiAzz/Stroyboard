@@ -4,7 +4,7 @@ class Story < ActiveRecord::Base
 
   validates :title, length: { maximum: 32 }, :presence => true
   validates :description, length: { maximum: 255 }, :presence => true
-  validates :point, :presence => true,
+  validates :point_value, :presence => true,
             :numericality => { :greater_than_or_equal_to => 0,
                                :less_than_or_equal_to => 100 }
   validates :content, length: { maximum: 255 }, :presence => true
