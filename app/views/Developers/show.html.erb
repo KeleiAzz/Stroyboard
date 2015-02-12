@@ -22,6 +22,16 @@
       <%= Story.find(@developer.story_id).title %>
   <%= link_to 'Show', story_path({:id => @developer.story_id}) %>
       <% end %>
+  <br>
+  <strong>Create stories:</strong>
+  <% if Story.where(developer_id: @developer.id).nil? %>
+      <%= 'None' %>
+  <% else %>
+      <% Story.where(developer_id: @developer.id).each do |story| %>
+        <td><%= story.title %></td>
+        <td><%= link_to 'Show', story_path({:id => story.id}) %></td>
+        <% end %>
+  <% end %>
 </p>
 
 <%= link_to 'Edit', edit_developer_path(@developer) %> |
