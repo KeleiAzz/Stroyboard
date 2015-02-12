@@ -15,19 +15,29 @@
     <%= f.label :name %><br>
     <%= f.text_field :name %>
   </div>
+
     <% if current_user.class == Admin %>
     <%= f.label :project_id %>
     <%= select("developer", "project_id", Project.all.collect{ |c| [ c.name, c.id] }, {include_blank: true}) %>
     <% end %>
+
+
+    <%= f.label :project_id %><br>
+    <%= select("developer", "project_id", Project.all.collect{ |c| [ c.name, c.id] }) %>
+
+    <br>
+
     <div class="field">
+      <br>
       <%= f.label :email %><br>
       <%= f.text_field :email %>
     </div>
 
-    <%= f.label :password %>
+    <%= f.label :password %><br>
     <%= f.password_field :password %>
 
   <div class="actions">
+    <br>
     <%= f.submit %>
   </div>
 <% end %>

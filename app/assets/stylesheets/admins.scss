@@ -1,17 +1,35 @@
 // Place all the styles related to the admins controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
 h1{
   color: black;
-  test-align: center;
+  text-align: center;
   font-family: arial, sans-serif;
-  font-size: medium;
+  font-size: 100%;
 }
 
 body{
-  background-color: #000000;
+  text-align: center;
+  vertical-align: middle;
+  background-color: lightgrey;
+  font-size: large;
+  margin: 0;
+  padding: 0;
+  border: 2px solid #000000;
+  border-bottom-color: transparent;
+}
+p{
+  text-align: center;
 }
 
+table{
+  align: center;
+}
+th{
+  text-align: left;
+}
 a:link {
   color: #000000;
 }
@@ -21,5 +39,13 @@ a:visited {
 }
 
 a:hover {
+  background-color: #999999;
   text-decoration: underline;
 }
+
+div {
+  text-align: center;
+}
+
+
+
