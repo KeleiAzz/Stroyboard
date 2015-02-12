@@ -30,7 +30,8 @@ class StoriesController < ApplicationController
   def create
     # story_params[:creator] = current_user.id
     @story = Story.new(story_params)
-    # @stroy.developer_id = current_user.id
+    @story.developer_id = current_user.id
+
     respond_to do |format|
       @story.developer_id = current_user.id
       if @story.save
@@ -106,29 +107,21 @@ class StoriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def story_params
-      params.require(:story).permit(:title, :description, :point_value, :content, :project_id, :stage_id)
+      params.require(:story).permit(:title, :description, :point, :content, :stage, :project_id)
     end
-    def logged_in_user
-      unless logged_in?
-        flash[:danger] = "Please log in."
-       redirect_to root_path
-     end
-    end
+
     def logged_in_developer
       unless current_user.class == Developer
         flash[:notice] = "Can only be created by developer"
         redirect_to projects_path
       end
     end
+
     def correct_user
-      # if current_user.class == Developer && current_user.project_id == Story.find(params[:id]).project_id
-      #   @developer = Developer.find_by(story_id = params[:id])
-      # end
       unless current_user.class == Developer && current_user.project_id == Story.find(params[:id]).project_id
         flash[:notice] = "You are not permited to delete this story"
         redirect_to project_path(@story.project_id)
       end
-
     end
     def correct_user_edit
     # if current_user.class == Developer && current_user.project_id == Story.find(params[:id]).project_id

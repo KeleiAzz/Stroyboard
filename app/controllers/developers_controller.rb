@@ -3,6 +3,7 @@ class DevelopersController < ApplicationController
   before_action :logged_in_user, only: [:index]
   before_action :correct_user,   only: [:show, :edit, :update]
   before_action :correct_user_admin,   only: [:new, :destroy]
+  before_action :correct_email, only: [:create]
   # GET /Developers
   # GET /Developers.json
   def index
@@ -23,6 +24,10 @@ class DevelopersController < ApplicationController
   def edit
   end
 
+  def assign
+
+  end
+
   # POST /Developers
   # POST /Developers.json
   def create
@@ -30,7 +35,8 @@ class DevelopersController < ApplicationController
 
     respond_to do |format|
       if @developer.save
-        format.html { redirect_to @developer, notice: 'Developer was successfully created.' }
+        UserMailer.welcome_email(@developer).deliver
+        format.html { redirect_to @developer, notice: "Developer was successfully created, a confirmation email has been sent to the developer's mailbox" }
         format.json { render :show, status: :created, location: @developer }
       else
         format.html { render :new }
@@ -77,6 +83,7 @@ class DevelopersController < ApplicationController
     def developer_params
       params.require(:developer).permit(:name, :email, :password, :project_id, :story_id)
     end
+
     def logged_in_user
       unless logged_in?
         flash[:notice] = "Please log in."
@@ -86,6 +93,7 @@ class DevelopersController < ApplicationController
     def add_project
       Developer.find(params[:id]).project_id = params[:project_id]
     end
+
     def correct_user
       if current_user.class == Developer
         @developer = Developer.find(params[:id])
@@ -102,5 +110,11 @@ class DevelopersController < ApplicationController
         redirect_to developers_path
       end
 
+    end
+    def correct_email
+      if !Admin.find_by_email(developer_params[:email]).nil?
+        flash[:notice] = "The email has already been registered as admin!"
+        redirect_to developers_path
+      end
     end
 end

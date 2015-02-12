@@ -6,7 +6,6 @@ module SessionsHelper
     elsif user.class == Developer
       session[:admin_id] = nil
       session[:developer_id] = user.id
-    # session[:admin_id] = admin.id
     end
   end
   def current_user
@@ -26,4 +25,12 @@ module SessionsHelper
     session.delete(:developer_id)
     @current_user = nil
   end
+
+  def logged_in_user
+    unless logged_in?
+      flash[:notice] = "Please log in."
+      redirect_to root_path
+    end
+  end
+
 end

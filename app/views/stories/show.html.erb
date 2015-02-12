@@ -13,11 +13,14 @@
   <strong>Description:</strong>
   <%= @story.description %>
   <br>
+  <strong>Point:</strong>
+  <%= @story.point %>
+  <br>
   <strong>Project:</strong>
   <%= Project.find(@story.project_id).name %>
   <br>
   <strong>Stage:</strong>
-  <%= Stage.find(@story.stage_id).name %>
+  <%= @story.stage %>
   <br>
   <strong>Developer:</strong>
   <% Developer.where(story_id: @story.id).each do |developer| %>

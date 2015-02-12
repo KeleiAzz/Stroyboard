@@ -99,15 +99,14 @@ class ProjectsController < ApplicationController
     def project_params
       params.require(:project).permit(:name, :description)
     end
-    # def developer_params
-    #   params.require(:developer).permit(:email)
-    # end
+
     def logged_in_user
      unless logged_in?
        flash[:notice] = "Please log in."
        redirect_to root_path
      end
     end
+
     def correct_user
       unless current_user.class == Admin
         flash[:notice] = "Only access by Admin."

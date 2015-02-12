@@ -3,9 +3,10 @@ require 'test_helper'
 class AdminsControllerTest < ActionController::TestCase
   setup do
     @admin = admins(:one)
+    session[:admin_id] = @admin.id
   end
 
-  test "should get index" do
+  test "should have index" do
     get :index
     assert_response :success
     assert_not_nil assigns(:admins)
@@ -18,7 +19,9 @@ class AdminsControllerTest < ActionController::TestCase
 
   test "should create admin" do
     assert_difference('Admin.count') do
-      post :create, admin: { email: @admin.email }
+      post :create, admin: { email: 'a' + @admin.email,
+                             password: 'MyPassword',
+                             name: @admin.name }
     end
 
     assert_redirected_to admin_path(assigns(:admin))
@@ -35,15 +38,10 @@ class AdminsControllerTest < ActionController::TestCase
   end
 
   test "should update admin" do
-    patch :update, id: @admin, admin: { email: @admin.email }
-    assert_redirected_to admin_path(assigns(:admin))
+    patch :update, id: @admin, admin: { email: 'a' + @admin.email,
+                                        password: 'MyPassword',
+                                        name: @admin.name }
+    assert_redirected_to @admin
   end
 
-  test "should destroy admin" do
-    assert_difference('Admin.count', -1) do
-      delete :destroy, id: @admin
-    end
-
-    assert_redirected_to admins_path
-  end
 end
