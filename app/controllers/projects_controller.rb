@@ -115,7 +115,7 @@ class ProjectsController < ApplicationController
     def correct_user
       unless current_user.class == Admin
         flash[:notice] = "Only access by Admin."
-        redirect_to project_path(@project)
+        redirect_to projects_path
       end
     end
 end

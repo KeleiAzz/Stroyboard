@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Storyboard</title>
+        <title><%= yield(:title) %></title>
         <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
         <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
         <%= csrf_meta_tags %>
@@ -10,10 +10,14 @@
     <body>
     <header class="navbar navbar-fixed-top navbar-inverse">
       <div class="container">
-        <%= link_to "Home Page", home_path %>
+        <%= link_to "Storyboard", home_path, id: "logo" %>
         <nav>
           <ul class="nav navbar-nav navbar-right">
-            <% if current_user.nil? %>
+            <% if !current_user.nil? %>
+                <li><%= link_to 'Profile', current_user.class == Developer ? current_user : current_user %>
+                  <!--<%= link_to 'Edit', current_user.class == Developer ? edit_developer_path(current_user) : edit_admin_path(current_user) %>-->
+                </li>
+            <% else %>
                 <li><%= link_to "Log in", login_path %></li>
             <% end %>
                 <li><%= link_to "Log out", logout_path, method: :get %></li>
@@ -21,23 +25,30 @@
         </nav>
       </div>
     </header>
-      <h1>Story board</h1>
-        <% if !current_user.nil? %>
-            <p>Current user: <%= current_user.name %> <%= '(' + current_user.class.to_s + ')' %>
-            <%= link_to 'Show', current_user.class == Developer ? current_user : current_user %>
-            <%= link_to 'Edit', current_user.class == Developer ? edit_developer_path(current_user) : edit_admin_path(current_user) %>
-            </p>
-        <% end %>
-        <% if flash[:alert] %>
-            <p class="flash-error"><%= flash[:alert] %></p>
-        <% end %>
-        <% if flash[:notice] %>
-            <p class="flash-notice"><%= flash[:notice] %></p>
-        <% end %>
+      <!--<h1><%= yield(:title) %></h1>-->
+
+
+        <!--<% if flash[:alert] %>-->
+            <!--<p class="flash-error"><%= flash[:alert] %></p>-->
+        <!--<% elsif flash[:notice] %>-->
+            <!--<p class="flash-notice"><%= flash[:notice] %></p>-->
+        <!--<% end %>-->
 
         <%= yield %>
 
-
+        <footer class="footer">
+          <small>
+            The <a href="http://www.railstutorial.org/">Story board</a>
+            by <a href="http://www.michaelhartl.com/">Kelei</a>
+          </small>
+          <nav>
+            <ul>
+              <li><%= link_to "About",   '#' %></li>
+              <li><%= link_to "Contact", '#' %></li>
+              <li><a href="http://news.railstutorial.org/">News</a></li>
+            </ul>
+          </nav>
+        </footer>
 
     </body>
 </html>
