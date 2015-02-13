@@ -1,0 +1,14 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+one:
+  id: 1
+  email: MyAdmin1@ncsu.edu
+  name: MyName
+  password_digest: <%= BCrypt::Password.create("MyPassword") %>
+
+
+two:
+  id: 2
+  email: MyAdmin2@ncsu.edu
+  name: MyName
+  password_digest: <%= BCrypt::Password.create("MyPassword") %>
+

@@ -1,15 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  email: Developer3@ncsu.edu
-  name: MyName
-  password_digest: <%= BCrypt::Password.create("MyPassword") %>
+  id: 1
+  email: Developer1@ncsu.edu
+  name: Developer1
+  password_digest: <%= BCrypt::Password.create("Password") %>
   project_id: 1
   story_id: 1
 
 two:
-  email: Developer4@ncsu.edu
-  name: MyName
-  password_digest: <%= BCrypt::Password.create("MyPassword") %>
+  id: 2
+  email: Developer2@ncsu.edu
+  name: Developer2
+  password_digest: <%= BCrypt::Password.create("Password") %>
   project_id: 2
   story_id: 2

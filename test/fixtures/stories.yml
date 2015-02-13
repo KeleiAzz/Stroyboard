@@ -1,19 +1,21 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  title: MyString1
-  description: MyDescription
+  id: 1
+  title: Story1
+  description: Description1
   point: 10
-  content: MyContent
+  content: Content1
   project_id: 1
   stage: In Dev
   developer_id: 1
 
 two:
-  title: MyString2
-  description: MyDescription
+  id: 2
+  title: Story2
+  description: Description2
   point: 10
-  content: MyContent
+  content: Content2
   project_id: 2
   stage: In Dev
   developer_id: 2

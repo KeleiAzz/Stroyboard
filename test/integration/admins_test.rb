@@ -10,6 +10,8 @@ class AdminsTest < ActionDispatch::IntegrationTest
   def setup
     @admin = admins(:one)
     @developer = developers(:one)
+    @project = projects(:one)
+    @story = stories(:one)
   end
 
   test "login via https" do
@@ -18,7 +20,7 @@ class AdminsTest < ActionDispatch::IntegrationTest
     get "/login"
     assert_response :success
 
-    post_via_redirect "/login", session: {email: "MyAdmin1@ncsu.edu", password: "MyPassword"}
+    post_via_redirect "/login", session: {email: "Admin1@ncsu.edu", password: "Password"}
     assert_equal '/home', path
 
   end
@@ -29,15 +31,15 @@ class AdminsTest < ActionDispatch::IntegrationTest
     get "/login"
     assert_response :success
 
-    post_via_redirect "/login", session: {email: "MyAdmin1@ncsu.edu", password: "MyPassword"}
+    post_via_redirect "/login", session: {email: "Admin1@ncsu.edu", password: "Password"}
     assert_equal '/home', path
 
     https!
     get "/developers/new"
     assert_response :success
 
-    post  "/developers", developer: {email: "Developer5@ncsu.edu", password: "MyPassword",
-                      name: "Developer5", project_id: nil}
+    post  "/developers", developer: {email: "Developer3@ncsu.edu", password: "Password",
+                      name: "Developer3", project_id: nil}
 
     assert_equal "Developer was successfully created, a confirmation email has been sent to the developer's mailbox",
                   flash[:notice]
@@ -50,11 +52,11 @@ class AdminsTest < ActionDispatch::IntegrationTest
     get "/login"
     assert_response :success
 
-    post_via_redirect "/login", session: {email: "MyAdmin1@ncsu.edu", password: "MyPassword"}
+    post_via_redirect "/login", session: {email: "Admin1@ncsu.edu", password: "Password"}
     assert_equal '/home', path
 
     https!
-    delete "/developers/980190962"
+    delete developer_path(@developer.id)
     assert_equal "Developer was successfully destroyed.", flash[:notice]
 
   end
@@ -65,7 +67,7 @@ class AdminsTest < ActionDispatch::IntegrationTest
     get "/login"
     assert_response :success
 
-    post_via_redirect "/login", session: {email: "MyAdmin1@ncsu.edu", password: "MyPassword"}
+    post_via_redirect "/login", session: {email: "Admin1@ncsu.edu", password: "Password"}
     assert_equal '/home', path
 
     https!
@@ -84,11 +86,11 @@ class AdminsTest < ActionDispatch::IntegrationTest
     get "/login"
     assert_response :success
 
-    post_via_redirect "/login", session: {email: "MyAdmin1@ncsu.edu", password: "MyPassword"}
+    post_via_redirect "/login", session: {email: "Admin1@ncsu.edu", password: "Password"}
     assert_equal '/home', path
 
     https!
-    delete "/projects/980190962"
+    delete project_path(@project.id)
     assert_equal "Project was successfully destroyed.", flash[:notice]
 
   end

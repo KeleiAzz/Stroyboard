@@ -7,14 +7,27 @@ class SessionTest < ActionDispatch::IntegrationTest
   def setup
     @admin = admins(:one)
     @developer = developers(:one)
-    @session = []
   end
 
-  test "login" do
+  test "Admin can login" do
 
-    log_in @admin
+    https!
+    get "/login"
+    assert_response :success
 
-    assert_equal 'welcome, admin', flash[:notice]
+    post_via_redirect "/login", session: {email: "Admin1@ncsu.edu", password: "Password"}
+    assert_equal '/home', path
+
+  end
+
+  test "Developer can login" do
+
+    https!
+    get "/login"
+    assert_response :success
+
+    post_via_redirect "/login", session: {email: "Developer1@ncsu.edu", password: "Password"}
+    assert_equal '/home', path
 
   end
 
