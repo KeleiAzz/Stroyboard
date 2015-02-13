@@ -1,2 +1,2 @@
-Admin : kgong@ncsu.edu
+Admin : kgong@ncsu.edu   
 password: qwerty
