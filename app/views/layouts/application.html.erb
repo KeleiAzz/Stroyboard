@@ -13,6 +13,7 @@
         <%= link_to "Storyboard", home_path, id: "logo" %>
         <nav>
           <ul class="nav navbar-nav navbar-right">
+                <li><%= link_to 'Home', home_path%></li>
             <% if !current_user.nil? %>
                 <li><%= link_to 'Profile', current_user.class == Developer ? current_user : current_user %>
                   <!--<%= link_to 'Edit', current_user.class == Developer ? edit_developer_path(current_user) : edit_admin_path(current_user) %>-->

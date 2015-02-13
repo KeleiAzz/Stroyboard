@@ -1,6 +1,9 @@
 <p id="notice"><%= notice %></p>
 <h1>Project details</h1>
-<p>
+
+  <div class="center">
+    <div class="left">
+    <p>
   <strong>Name:</strong>
   <%= @project.name %>
   <br>
@@ -63,6 +66,7 @@
   <% end %>
 
 </p>
-
+  </div>
+  </div>
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Back', projects_path %>

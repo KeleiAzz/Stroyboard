@@ -1,11 +1,15 @@
 <p id="notice"><%= notice %></p>
-
+<%= provide(:title, @developer.name.to_s+"'s profile")%>
+   <h1>Developer details</h1>
 <p>
   <strong>Name:</strong>
   <%= @developer.name %>
   <br>
   <strong>Email:</strong>
   <%= @developer.email %>
+  <br>
+  <strong>Status:</strong>
+  <%= @developer.class.to_s %>
   <br>
   <strong>Project working on:</strong>
   <% if @developer.project_id == nil %>
