@@ -49,8 +49,15 @@ p {
   font-size: 1.1em;
   line-height: 1.7em;
 }
+.btn{
+  background-color: lightskyblue;
+}
 
 /* header */
+.navbar {
+background-color: lightskyblue;
+background-image: none;
+}
 #logo {
   float: left;
   margin-right: 10px;

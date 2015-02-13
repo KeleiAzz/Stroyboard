@@ -69,7 +69,6 @@ class ProjectsController < ApplicationController
   end
 
   def add_to_dev
-
     if !params[:developer].nil?
       temp = Developer.new()
       temp = Developer.find(params[:developer][:id])
@@ -83,13 +82,11 @@ class ProjectsController < ApplicationController
       if temp.save
         flash[:notice] = "Add developer to project succseefully!"
       end
-
-
       redirect_to project_path({:id => params[:id]})
     elsif !params[:search].nil?
     redirect_to project_path({:id => params[:id], :search => params[:search]})
       end
-  end
+    end
   def search
     params[:stories] = Story.where(:conditions => ['title LIKE ?', "%#{params[:search]}%"])
 

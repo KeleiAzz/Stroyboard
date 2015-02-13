@@ -10,21 +10,10 @@
   <strong>Description:</strong>
   <%= @project.description %>
   <br>
-  <strong>Stories List:</strong>
-  <br>
-  <% Story.where(project_id: @project.id).each do |story| %>
-      <tr>
-        <td><%= story.title %></td>
-        <td><%= link_to 'Show', story %></td>
-        <td><%= link_to 'Edit', edit_story_path(story) %></td>
-        <td><%= link_to 'Destroy', story, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <td><% if current_user.class == Developer %>
-           <%= link_to 'Sign up',signup_path(story) %>
+  <strong>Stories:</strong>
 
-        <% end %></td>
-        <br>
-      </tr>
-  <% end %>
+      <%= link_to "Story Board", stories_path({:project_id =>2}) %>
+    <br>
   <% if current_user.class == Developer && current_user.project_id == @project.id %>
       <%= link_to 'New Story', new_story_path %>
       <% end %>
@@ -61,9 +50,6 @@
       <% end %>
       <% end %>
 
-  <% if current_user.class == Developer && current_user.project_id == @project.id %>
-    <%= link_to 'New Story', new_story_path %>
-  <% end %>
 
 </p>
   </div>

@@ -1,8 +1,9 @@
 <p id="notice"><%= notice %></p>
-
-<h1>Listing Stories</h1>
-
-<table>
+<% provide(:title, "Story Board for " + Project.find(params[:project_id]).name.to_s) %>
+<h1>Stories List</h1>
+<body>
+  <p>
+<table align="center">
   <thead>
     <tr>
       <th>Name</th>
@@ -11,17 +12,28 @@
   </thead>
 
   <tbody>
-    <% Story.where(project_id: 2).each do |story| %>
+
+    <% Story.where(project_id: params[:project_id]).each do |story| %>
       <tr>
         <td><%= story.title %></td>
         <td><%= link_to 'Show', story %></td>
         <td><%= link_to 'Edit', edit_story_path(story) %></td>
-        <td><%= link_to 'Destroy', story, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete', story, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><% if current_user.class == Developer %>
+              <%= link_to 'Sign up',signup_path(story) %>
+
+          <% end %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
+<br><br>
 
-<%= link_to 'New Story', new_story_path %>
+<%= link_to 'New Story', new_story_path, class: "btn btn-primary"%>
+  <br>
+  <br>
+  <%= link_to "Back", project_path({:id => params[:project_id]}) %>
+  </p>
+
+</body>

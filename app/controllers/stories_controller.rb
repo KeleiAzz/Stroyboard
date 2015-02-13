@@ -79,7 +79,7 @@ class StoriesController < ApplicationController
       flash[:notice] = "Sign up successful"
       redirect_to story_path(@story)
     elsif current_user.class != Developer || current_user.project_id != Story.find(params[:id]).project_id
-      flash[:notice] = "You can't sign up for story"
+      flash[:notice] = "You can't sign up for this story"
       redirect_to projects_path
     elsif current_user.story_id == @story.id
       flash[:notice] = "You are already the developer of this story"
