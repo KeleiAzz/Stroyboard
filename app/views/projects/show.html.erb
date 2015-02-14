@@ -1,4 +1,5 @@
 <p id="notice"><%= notice %></p>
+<% provide(:title, @project.name.to_s + "'s details") %>
 <h1>Project details</h1>
 
   <div class="center">
@@ -11,9 +12,25 @@
   <%= @project.description %>
   <br>
   <strong>Stories:</strong>
-
       <%= link_to "Story Board", stories_path({:project_id =>2}) %>
-    <br>
+      <table align="center">
+        <tbody>
+        <% Story.where(project_id: @project.id).each do |story| %>
+            <tr>
+              <td><%= story.title %></td>
+              <!--<td><%= story.stage %></td>-->
+              <td><%= link_to 'Show', story %></td>
+              <td><%= link_to 'Edit', edit_story_path(story) %></td>
+              <td><%= link_to 'Delete', story, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              <td><% if current_user.class == Developer %>
+                    <%= link_to 'Sign up',signup_path(story) %>
+
+                <% end %></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+
   <% if current_user.class == Developer && current_user.project_id == @project.id %>
       <%= link_to 'New Story', new_story_path %>
       <% end %>
