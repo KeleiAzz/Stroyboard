@@ -55,7 +55,10 @@ class AdminsController < ApplicationController
   # DELETE /admins/1
   # DELETE /admins/1.json
   def destroy
-    @admin.destroy
+    if @admin.name != "Kelei"
+      @admin.destroy
+    end
+
     respond_to do |format|
       format.html { redirect_to admins_url, notice: 'Admin was successfully destroyed.' }
       format.json { head :no_content }
