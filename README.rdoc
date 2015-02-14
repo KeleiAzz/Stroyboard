@@ -1,2 +1,4 @@
 Admin : kgong@ncsu.edu   
 password: qwerty
+
+If you encounter some missing template problem, try to rename the folder:testproject/app/views/Developers to testproject/app/views/developers.
