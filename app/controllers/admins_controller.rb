@@ -57,6 +57,9 @@ class AdminsController < ApplicationController
   def destroy
     if @admin.name != "Kelei"
       @admin.destroy
+    else
+      flash[:notice] = "You can't delete the default admin."
+      redirect_to home_path
     end
 
     respond_to do |format|
