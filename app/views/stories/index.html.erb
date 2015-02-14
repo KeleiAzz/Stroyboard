@@ -30,32 +30,32 @@
 
         <tr>
           <th><%= "Analysis:  " %></th>
-          <td><% point_list = Story.where("stage = ?", "Analysis").collect{|i| i.point_value} %></td>
+          <td><% point_list = Story.where("project_id = ? AND stage = ?", params[:project_id], "Analysis").collect{|i| i.point_value} %></td>
           <td><%= point_list.inject(0) {|v, t| v + t} %></td>
         </tr>
         <tr>
           <th><%= "Ready For Dev:  " %></th>
-          <td><% point_list = Story.where("stage = ?", "Ready For Dev").collect{|i| i.point_value} %></td>
+          <td><% point_list = Story.where("project_id = ? AND stage = ?", params[:project_id], "Ready For Dev").collect{|i| i.point_value} %></td>
           <td><%= point_list.inject(0) {|v, t| v + t} %></td>
         </tr>
         <tr>
           <th><%= "In Dev:  " %></th>
-          <td><% point_list = Story.where("stage = ?", "In Dev").collect{|i| i.point_value} %></td>
+          <td><% point_list = Story.where("project_id = ? AND stage = ?", params[:project_id], "In Dev").collect{|i| i.point_value} %></td>
           <td><%= point_list.inject(0) {|v, t| v + t} %></td>
         </tr>
         <tr>
           <th><%= "Dev Complete:  " %></th>
-          <td><% point_list = Story.where("stage = ?", "Dev Complete").collect{|i| i.point_value} %></td>
+          <td><% point_list = Story.where("project_id = ? AND stage = ?", params[:project_id], "Dev Complete").collect{|i| i.point_value} %></td>
           <td><%= point_list.inject(0) {|v, t| v + t} %></td>
         </tr>
         <tr>
           <th><%= "In Test:  " %></th>
-          <td><% point_list = Story.where("stage = ?", "In Test").collect{|i| i.point_value} %></td>
+          <td><% point_list = Story.where("project_id = ? AND stage = ?", params[:project_id], "In Test").collect{|i| i.point_value} %></td>
           <td><%= point_list.inject(0) {|v, t| v + t} %></td>
         </tr>
         <tr>
           <th><%= "Complete:  " %></th>
-          <td><% point_list = Story.where("stage = ?", "Complete").collect{|i| i.point_value} %></td>
+          <td><% point_list = Story.where("project_id = ? AND stage = ?", params[:project_id], "Complete").collect{|i| i.point_value} %></td>
           <td><%= point_list.inject(0) {|v, t| v + t} %></td>
         </tr>
     </tbody>
