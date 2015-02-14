@@ -57,15 +57,15 @@ class AdminsController < ApplicationController
   def destroy
     if @admin.name != "Kelei"
       @admin.destroy
+      respond_to do |format|
+        format.html { redirect_to admins_url, notice: 'Admin was successfully destroyed.' }
+        format.json { head :no_content }
+      end
     else
       flash[:notice] = "You can't delete the default admin."
       redirect_to home_path
     end
 
-    respond_to do |format|
-      format.html { redirect_to admins_url, notice: 'Admin was successfully destroyed.' }
-      format.json { head :no_content }
-    end
   end
 
   private
