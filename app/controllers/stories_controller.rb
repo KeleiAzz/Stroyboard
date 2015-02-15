@@ -95,6 +95,13 @@ class StoriesController < ApplicationController
     end
     # redirect_to projects_path
   end
+  def change_stage
+    @story = Stroy.find(params[:id])
+    @story.stage = params[:stage]
+    @story.save
+    flash[:notice] = "Change stage successful"
+    redirect_to project_path({:id => @story.project_id})
+  end
   def is_full(story)
     Developer.where(story_id: story.id).length >= 2
   end
@@ -119,7 +126,7 @@ class StoriesController < ApplicationController
 
     def correct_user
       unless current_user.class == Developer && current_user.project_id == Story.find(params[:id]).project_id
-        flash[:notice] = "You are not permited to delete this story"
+        flash[:notice] = "You are not permited to edit/delete this story"
         redirect_to project_path(@story.project_id)
       end
     end
