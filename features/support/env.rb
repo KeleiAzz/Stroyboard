@@ -6,13 +6,13 @@
 
 require 'cucumber/rails'
 
+
 Before do
   ActiveRecord::FixtureSet.reset_cache
   fixtures_folder = File.join(Rails.root, 'spec', 'fixtures')
   fixtures = Dir[File.join(fixtures_folder, '*.yml')].map {|f| File.basename(f, '.yml') }
   ActiveRecord::FixtureSet.create_fixtures(fixtures_folder, fixtures)
 end
-
 # Capybara defaults to CSS3 selectors rather than XPath.
 # If you'd prefer to use XPath, just uncomment this line and adjust any
 # selectors in your step definitions to use the XPath syntax.
