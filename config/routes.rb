@@ -12,8 +12,8 @@ Rails.application.routes.draw do
 
   get 'developers/assign_developer' => 'developers#assign'
 
-  post 'stories/:id' => 'stories#signup'
-
+  # post 'stories/:id' => 'stories#signup'
+  post 'stories/:id' => 'stories#change_stage'
   resources :projects
   post 'projects/:id' => 'projects#add_to_dev'
 

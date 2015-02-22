@@ -1,27 +1,72 @@
 <p id="notice"><%= notice %></p>
-
-<h1>Listing Stories</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<% provide(:title, "Story Board for " + Project.find(params[:project_id]).name.to_s) %>
+<h1>Stories not completed</h1>
+<body>
+  <p>
+<table align="center">
 
   <tbody>
-    <% Story.where(project_id: 2).each do |story| %>
+
+    <% Story.where("project_id = ? AND stage != ?", params[:project_id], "Complete" ).each do |story| %>
       <tr>
         <td><%= story.title %></td>
+        <td><%= story.stage %></td>
         <td><%= link_to 'Show', story %></td>
         <td><%= link_to 'Edit', edit_story_path(story) %></td>
-        <td><%= link_to 'Destroy', story, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete', story, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><% if current_user.class == Developer %>
+              <%= link_to 'Sign up',signup_path(story) %>
+
+          <% end %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+  <h1>Points in each stage:</h1>
+  <body>
+  <p>
+  <table align="center">
+    <tbody>
+
+        <tr>
+          <th><%= "Analysis:  " %></th>
+          <td><% point_list = Story.where("project_id = ? AND stage = ?", params[:project_id], "Analysis").collect{|i| i.point_value} %></td>
+          <td><%= point_list.inject(0) {|v, t| v + t} %></td>
+        </tr>
+        <tr>
+          <th><%= "Ready For Dev:  " %></th>
+          <td><% point_list = Story.where("project_id = ? AND stage = ?", params[:project_id], "Ready For Dev").collect{|i| i.point_value} %></td>
+          <td><%= point_list.inject(0) {|v, t| v + t} %></td>
+        </tr>
+        <tr>
+          <th><%= "In Dev:  " %></th>
+          <td><% point_list = Story.where("project_id = ? AND stage = ?", params[:project_id], "In Dev").collect{|i| i.point_value} %></td>
+          <td><%= point_list.inject(0) {|v, t| v + t} %></td>
+        </tr>
+        <tr>
+          <th><%= "Dev Complete:  " %></th>
+          <td><% point_list = Story.where("project_id = ? AND stage = ?", params[:project_id], "Dev Complete").collect{|i| i.point_value} %></td>
+          <td><%= point_list.inject(0) {|v, t| v + t} %></td>
+        </tr>
+        <tr>
+          <th><%= "In Test:  " %></th>
+          <td><% point_list = Story.where("project_id = ? AND stage = ?", params[:project_id], "In Test").collect{|i| i.point_value} %></td>
+          <td><%= point_list.inject(0) {|v, t| v + t} %></td>
+        </tr>
+        <tr>
+          <th><%= "Complete:  " %></th>
+          <td><% point_list = Story.where("project_id = ? AND stage = ?", params[:project_id], "Complete").collect{|i| i.point_value} %></td>
+          <td><%= point_list.inject(0) {|v, t| v + t} %></td>
+        </tr>
+    </tbody>
+  </table>
 
 <br>
 
-<%= link_to 'New Story', new_story_path %>
+<%= link_to 'New Story', new_story_path, class: "btn btn-primary"%>
+  <br>
+  <br>
+  <%= link_to "Back", project_path({:id => params[:project_id]}) %>
+  </p>
+
+</body>

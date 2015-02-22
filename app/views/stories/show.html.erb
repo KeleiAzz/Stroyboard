@@ -14,13 +14,20 @@
   <%= @story.description %>
   <br>
   <strong>Point:</strong>
-  <%= @story.point %>
+  <%= @story.point_value %>
   <br>
   <strong>Project:</strong>
   <%= Project.find(@story.project_id).name %>
   <br>
   <strong>Stage:</strong>
   <%= @story.stage %>
+  <% if current_user.class == Developer %>
+  <%= form_for @story, :url => url_for(:controller => 'stories', :action => 'change_stage') do |f|%>
+      <% f.label :stage %>
+      <%= select( "story", "stage", options_for_select(stage_options)) %>
+      <%= f.submit "Change"%>
+  <% end %>
+  <% end %>
   <br>
   <strong>Developer:</strong>
   <% Developer.where(story_id: @story.id).each do |developer| %>

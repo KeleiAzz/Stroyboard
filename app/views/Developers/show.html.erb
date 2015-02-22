@@ -1,11 +1,15 @@
 <p id="notice"><%= notice %></p>
-
+<%= provide(:title, @developer.name.to_s+"'s profile")%>
+   <h1>Developer details</h1>
 <p>
   <strong>Name:</strong>
   <%= @developer.name %>
   <br>
   <strong>Email:</strong>
   <%= @developer.email %>
+  <br>
+  <strong>Status:</strong>
+  <%= @developer.class.to_s %>
   <br>
   <strong>Project working on:</strong>
   <% if @developer.project_id == nil %>
@@ -22,6 +26,20 @@
       <%= Story.find(@developer.story_id).title %>
   <%= link_to 'Show', story_path({:id => @developer.story_id}) %>
       <% end %>
+<<<<<<< HEAD
+=======
+  <br>
+  <strong>Create stories:</strong>
+  <% if Story.where(developer_id: @developer.id).nil? %>
+      <%= 'None' %>
+  <% else %>
+      <% Story.where(developer_id: @developer.id).each do |story| %>
+        <td><%= story.title %></td>
+        <td><%= link_to 'Show', story_path({:id => story.id}) %></td>
+        <% end %>
+  <% end %>
+
+>>>>>>> origin/master
 </p>
 
 <%= link_to 'Edit', edit_developer_path(@developer) %> |

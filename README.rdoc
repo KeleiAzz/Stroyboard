@@ -1,28 +1,6 @@
-== README
+Admin : kgong@ncsu.edu   
+password: qwerty
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Please try to use correct email address to make sure you can actually receive the email.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+If you encounter some missing template problem, try to rename the folder:testproject/app/views/Developers to testproject/app/views/developers.

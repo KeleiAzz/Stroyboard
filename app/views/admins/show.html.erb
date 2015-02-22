@@ -1,12 +1,19 @@
 <p id="notice"><%= notice %></p>
-
+<%= provide(:title, @admin.name.to_s+"'s profile")%>
+<h1>Admin's details</h1>
+<div class="center">
 <p>
   <strong>Name:</strong>
   <%= @admin.name %>
   <br>
   <strong>Email:</strong>
   <%= @admin.email %>
-</p>
+  <br>
+  <strong>Status:</strong>
 
-<%= link_to 'Edit', edit_admin_path(@admin) %> |
-<%= link_to 'Back', admins_path %>
+  <%= @admin.class.to_s %>
+</p>
+  <%= link_to 'Edit', edit_admin_path(@admin) %> |
+  <%= link_to 'Back', admins_path %>
+</div>
+

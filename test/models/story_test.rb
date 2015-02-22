@@ -5,7 +5,7 @@ class StoryTest < ActiveSupport::TestCase
   def setup
     @story = Story.new( title: "MyTitle",
                         description: "MyDescription",
-                        point: 10,
+                        point_value: 10,
                         content: "MyContent",
                         project_id: 1,
                         stage: "In Dev",

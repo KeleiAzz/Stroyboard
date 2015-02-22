@@ -1,28 +1,52 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Storyboard</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-<h1>Story board test</h1>
-<% if !current_user.nil? %>
-<p>Current user: <%= current_user.name %> <%= '(' + current_user.class.to_s + ')' %>
-  <%= link_to 'Show', current_user.class == Developer ? current_user : current_user %>
-  <%= link_to 'Edit', current_user.class == Developer ? edit_developer_path(current_user) : edit_admin_path(current_user) %>
-</p>
-    <% end %>
-<%= yield %>
-<br>
-<br>
-<%= link_to "Home Page", home_path %>
-<br>
-<% if current_user.nil? %>
-<%= link_to "Log in", login_path %>
-<% end %>
+    <head>
 
-<%= link_to "Log out", logout_path, method: :get %>
-</body>
+      <title><%=  params[:title].nil? ? yield(:title) : 'Story board' %></title>
+        <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+        <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+        <%= csrf_meta_tags %>
+    </head>
+
+    <body>
+    <header class="navbar navbar-fixed-top">
+      <div class="container">
+        <%= link_to "Storyboard", home_path, id: "logo" %>
+        <nav>
+          <ul class="nav navbar-nav navbar-right">
+
+                <li><%= link_to 'Home', home_path%></li>
+            <% if !current_user.nil? %>
+                <li><%= link_to 'Profile', current_user.class == Developer ? current_user : current_user %>
+                  <!--<%= link_to 'Edit', current_user.class == Developer ? edit_developer_path(current_user) : edit_admin_path(current_user) %>-->
+                </li>
+            <% else %>
+                <li><%= link_to "Log in", login_path %></li>
+            <% end %>
+                <li><%= link_to "Log out", logout_path, method: :get %></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+      <!--<h1><%= yield(:title) %></h1>-->
+
+
+        <!--<% if flash[:alert] %>-->
+            <!--<p class="flash-error"><%= flash[:alert] %></p>-->
+        <!--<% elsif flash[:notice] %>-->
+            <!--<p class="flash-notice"><%= flash[:notice] %></p>-->
+        <!--<% end %>-->
+
+        <%= yield %>
+
+        <footer class="footer">
+          <nav>
+            <ul>
+              <li><%= link_to "About",   '#' %></li>
+              <li><%= link_to "Contact", '#' %></li>
+            </ul>
+          </nav>
+        </footer>
+
+    </body>
 </html>

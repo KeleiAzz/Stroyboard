@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
-
+<% provide(:title, "Developers List") %>
 <h1>Listing Developers</h1>
 
-<table>
+<table align="center">
   <thead>
     <tr>
       <th>Name</th>
@@ -16,13 +16,16 @@
         <td><%= developer.name %></td>
         <td><%= link_to 'Show', developer %></td>
         <td><%= link_to 'Edit', edit_developer_path(developer) %></td>
-        <td><%= link_to 'Destroy', developer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete', developer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
 
       </tr>
     <% end %>
   </tbody>
+
 </table>
+<br>
+<center><%= link_to 'New Developer', new_developer_path, class: 'btn btn-primary btn-center' %></center>
 
 <br>
 
-<%= link_to 'New Developer', new_developer_path %>
+

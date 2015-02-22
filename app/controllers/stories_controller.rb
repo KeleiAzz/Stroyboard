@@ -79,7 +79,7 @@ class StoriesController < ApplicationController
       flash[:notice] = "Sign up successful"
       redirect_to story_path(@story)
     elsif current_user.class != Developer || current_user.project_id != Story.find(params[:id]).project_id
-      flash[:notice] = "You can't sign up for story"
+      flash[:notice] = "You can't sign up for this story"
       redirect_to projects_path
     elsif current_user.story_id == @story.id
       flash[:notice] = "You are already the developer of this story"
@@ -95,6 +95,13 @@ class StoriesController < ApplicationController
     end
     # redirect_to projects_path
   end
+  def change_stage
+    @story = Stroy.find(params[:id])
+    @story.stage = params[:stage]
+    @story.save
+    flash[:notice] = "Change stage successful"
+    redirect_to project_path({:id => @story.project_id})
+  end
   def is_full(story)
     Developer.where(story_id: story.id).length >= 2
   end
@@ -107,7 +114,7 @@ class StoriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def story_params
-      params.require(:story).permit(:title, :description, :point, :content, :stage, :project_id)
+      params.require(:story).permit(:title, :description, :point_value, :content, :stage, :project_id)
     end
 
     def logged_in_developer
@@ -119,7 +126,7 @@ class StoriesController < ApplicationController
 
     def correct_user
       unless current_user.class == Developer && current_user.project_id == Story.find(params[:id]).project_id
-        flash[:notice] = "You are not permited to delete this story"
+        flash[:notice] = "You are not permited to edit/delete this story"
         redirect_to project_path(@story.project_id)
       end
     end

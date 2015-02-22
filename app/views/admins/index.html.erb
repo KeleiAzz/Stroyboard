@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
-
+<% provide(:title, "Admins List") %>
 <h1>Listing Admins</h1>
 
-<table>
+<table align="center">
   <thead>
     <tr>
       <th>Email</th>
@@ -16,12 +16,14 @@
         <td><%= admin.email %></td>
         <td><%= link_to 'Show', admin %></td>
         <td><%= link_to 'Edit', edit_admin_path(admin) %></td>
-        <td><%= link_to 'Destroy', admin, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete', admin, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
+<br><br><br><br>
 
-<%= link_to 'New Admin', new_admin_path %>
+<center><%= link_to 'New Admin', new_admin_path, class: 'btn btn-primary' %></center>
+
+<br><br><br>

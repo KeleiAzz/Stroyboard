@@ -1,9 +1,14 @@
-<p id="notice"><%= notice %></p>
-<h1>Welcome to Storyboard</h1>
-<% if current_user.class == Admin %>
-    <%= link_to "View all Admins", admins_path %>
-<% end %>
-<br>
-<%= link_to "View all Projects", projects_url %>
-<br>
-<%= link_to "View all Developers", developers_url %>
+<% provide(:title, "Home") %>
+<!--<p id="notice"><%= notice %></p>-->
+<div class="center ">
+  <h1>Welcome to Storyboard</h1>
+  <br>
+  <% if current_user.class == Admin %>
+      <%= link_to "View all Admins", admins_path, class: "btn btn-lg btn-primary"%>
+  <% end %>
+  <br>
+  <br>
+  <%= link_to "View all Projects", projects_url,class: "btn btn-lg btn-primary" %>
+  <br><br>
+  <%= link_to "View all Developers", developers_url, class: "btn btn-lg btn-primary" %>
+</div>
