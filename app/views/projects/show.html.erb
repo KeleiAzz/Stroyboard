@@ -14,7 +14,7 @@
   <strong>Stories:</strong>
       <%= link_to "Story Board", stories_path({:project_id => @project.id}) %>
       <div class="row">
-        <div class="col-md-2 col-md-offset-5">
+        <div class="col-md-5 col-md-offset-4">
           <table class="table table-condensed">
         <tbody>
         <% Story.where(project_id: @project.id).each do |story| %>
@@ -37,6 +37,7 @@
   <% if current_user.class == Developer && current_user.project_id == @project.id %>
       <%= link_to 'New Story', new_story_path %>
       <% end %>
+      <br>
   <strong>Developers List:</strong>
       <div class="row">
       <div class="col-md-2 col-md-offset-5">
@@ -45,7 +46,6 @@
       <tr>
         <td><%= developer.name %></td>
         <td><%= link_to 'Show', developer %></td>
-        <br>
       </tr>
   <% end %>
             </table>
@@ -67,12 +67,20 @@
   <% end %>
   <br>
   <% if params[:search] %>
+          <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+              <table class="table table-condensed">
     <% Story.where('title LIKE ? OR content LIKE ?', "%#{params[:search]}%","%#{params[:search]}%").each do |i| %>
-      <td><%= i.title%></td>
-        <td><%= link_to 'Show', i %></td>
+                    <tr>
+                    <td><%= i.title%></td>
+                      <td><%= Project.find(i.project_id).name %></td>
+                    <td><%= link_to 'Show', i %></td>
+                    </tr>
       <% end %>
       <% end %>
-
+        </table>
+      </div>
+      </div>
 
 </p>
   </div>
