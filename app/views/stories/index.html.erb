@@ -3,7 +3,9 @@
 <h1>Stories not completed</h1>
 <body>
   <p>
-<table align="center">
+    <div class="row">
+  <div class="col-md-5 col-md-offset-3">
+    <table class="table table-condensed">
 
   <tbody>
 
@@ -22,10 +24,14 @@
     <% end %>
   </tbody>
 </table>
+    </div>
+      </div>
   <h1>Points in each stage:</h1>
   <body>
   <p>
-  <table align="center">
+    <div class="row">
+  <div class="col-md-2 col-md-offset-5">
+    <table class="table table-condensed">
     <tbody>
 
         <tr>
@@ -60,7 +66,8 @@
         </tr>
     </tbody>
   </table>
-
+</div>
+      </div>
 <br>
 
 <%= link_to 'New Story', new_story_path, class: "btn btn-primary"%>

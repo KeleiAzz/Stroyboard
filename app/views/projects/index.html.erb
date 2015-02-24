@@ -2,7 +2,9 @@
 <% provide(:title, "Projects List") %>
 <h1>Listing Projects</h1>
 
-<table align="center">
+<div class="row">
+<div class="col-md-5 col-md-offset-3">
+  <table class="table table-condensed">
   <thead>
     <tr>
       <th>Name</th>
@@ -21,6 +23,9 @@
     <% end %>
   </tbody>
 </table>
+ </div>
+  </div>
+
 <br>
 <br>
 <% if  current_user.class == Developer && !current_user.project_id.nil?  %>

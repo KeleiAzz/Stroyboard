@@ -13,7 +13,9 @@
   <br>
   <strong>Stories:</strong>
       <%= link_to "Story Board", stories_path({:project_id => @project.id}) %>
-      <table align="center">
+      <div class="row">
+        <div class="col-md-2 col-md-offset-5">
+          <table class="table table-condensed">
         <tbody>
         <% Story.where(project_id: @project.id).each do |story| %>
             <tr>
@@ -30,13 +32,15 @@
         <% end %>
         </tbody>
       </table>
-
+</div>
+        </div>
   <% if current_user.class == Developer && current_user.project_id == @project.id %>
       <%= link_to 'New Story', new_story_path %>
       <% end %>
-  <br>
   <strong>Developers List:</strong>
-  <br>
+      <div class="row">
+      <div class="col-md-2 col-md-offset-5">
+        <table class="table table-condensed">
   <% Developer.where(project_id: @project.id).each do |developer| %>
       <tr>
         <td><%= developer.name %></td>
@@ -44,7 +48,9 @@
         <br>
       </tr>
   <% end %>
-  <br>
+            </table>
+          </div>
+        </div>
   <% if current_user.class == Admin %>
       <strong>Add developer to project:</strong>
       <br>
