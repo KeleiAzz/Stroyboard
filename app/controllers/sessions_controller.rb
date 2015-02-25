@@ -1,9 +1,11 @@
 class SessionsController < ApplicationController
   def new
+
   end
   def create
     developer = Developer.find_by(email: params[:session][:email])
     admin = Admin.find_by(email: params[:session][:email])
+    # cookies[:admin_id] = {value: admin.id}
     if admin && admin.authenticate(params[:session][:password])
       log_in admin
       redirect_to home_path

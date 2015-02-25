@@ -2,7 +2,9 @@
 <% provide(:title, "Developers List") %>
 <h1>Listing Developers</h1>
 
-<table align="center">
+<div class="row">
+<div class="col-md-5 col-md-offset-3">
+  <table class="table table-condensed">
   <thead>
     <tr>
       <th>Name</th>
@@ -23,6 +25,8 @@
   </tbody>
 
 </table>
+  </div>
+  </div>
 <br>
 <center><%= link_to 'New Developer', new_developer_path, class: 'btn btn-primary btn-center' %></center>
 
