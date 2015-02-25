@@ -7,7 +7,7 @@ namespace :bootstrap do
 
   desc "set finish time"
   task :set_finishtime => :environment do
-    Story.where("stage = ?", "Complete").each do |story|
+    Story.all.each do |story|
       story.finishTime=Random.rand(10)
       story.save
     end
