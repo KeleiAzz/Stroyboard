@@ -38,6 +38,12 @@ ActiveRecord::Schema.define(version: 20150225153100) do
     t.datetime "updated_at"
   end
 
+  create_table "stages", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "stories", force: :cascade do |t|
     t.string   "title"
     t.string   "description"
@@ -46,8 +52,8 @@ ActiveRecord::Schema.define(version: 20150225153100) do
     t.integer  "project_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "stage"
     t.integer  "developer_id"
+    t.string   "stage"
     t.integer  "finishTime"
   end
 

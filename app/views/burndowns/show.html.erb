@@ -20,11 +20,7 @@
 %>
 <div align="center">
   <img src="<%=bar_chart%>"/>
+  <br><br><br>
+  <%= link_to "Back", project_path({:id => params[:id]}) , class: 'btn btn-md btn-primary'%>
 </div>
 
-
-<footer class="footer">
-  <small>
-    <%= button_to "Back", session[:comingFrom], method: :get , class: 'btn btn-md btn-primary'%>
-  </small>
-</footer>
