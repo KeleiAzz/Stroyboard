@@ -5,7 +5,7 @@
 
    @expected = (1..@dataArray[0]).step(10).to_a
    @expected.reverse!
-
+   @expected[0] = @dataArray[0]
    bar_chart = Gchart.line(
            :size => '600x400',
            :bar_colors => ['000000', '0088FF'],
