@@ -4,7 +4,13 @@ Feature: LOGIN
   I want to login
 
   Scenario: Admin Login
-    Given I am an admin
-    When I go to the login page
-    Then I input my email and password
+    Given I am on the login page
+    When I input my admin email and password
+    Then I click the "login" button
+    And I should see homepage
+
+  Scenario: Developer Login
+    Given I am on the login page
+    When I input my developer email and password
+    Then I click the "login" button
     And I should see homepage

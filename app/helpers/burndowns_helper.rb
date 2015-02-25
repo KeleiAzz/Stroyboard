@@ -1,0 +1,3 @@
+module BurndownsHelper
+
+end

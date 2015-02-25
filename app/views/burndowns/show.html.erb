@@ -1,0 +1,30 @@
+<h1>Burndown Chart</h1>
+
+<%require 'gchart'%>
+<%
+
+   @expected = (1..@dataArray[0]).step(10).to_a
+   @expected.reverse!
+
+   bar_chart = Gchart.line(
+           :size => '600x400',
+           :bar_colors => ['000000', '0088FF'],
+           :bg => 'FFFFFF',
+           :legend => ['Expected Time Remaining', 'Actual Time Remaining'],
+           :data => [@expected, @dataArray],
+           :stacked => false,
+           :legend_position => 'bottom',
+           :axis_with_labels => [['x'], ['y']],
+           :min_value => 0,
+   )
+%>
+<div align="center">
+  <img src="<%=bar_chart%>"/>
+</div>
+
+
+<footer class="footer">
+  <small>
+    <%= button_to "Back", session[:comingFrom], method: :get , class: 'btn btn-md btn-primary'%>
+  </small>
+</footer>

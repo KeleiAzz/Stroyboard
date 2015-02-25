@@ -15,13 +15,7 @@ class SessionsController < ApplicationController
 
     else
       # Create an error message.
-<<<<<<< HEAD
-#      flash[:danger] = params[:session][:email]
-      flash[:danger] = 'Invalid email/password combination' # Not quite right!
-=======
-      # flash[:danger] = params[:session][:email]
-     flash[:notice] = 'Invalid email/password combination'
->>>>>>> origin/master
+      flash[:notice] = 'Invalid email/password combination'
       render 'new'
     end
   end
